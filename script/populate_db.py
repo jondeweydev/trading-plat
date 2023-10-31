@@ -2,7 +2,7 @@ import sqlite3
 import os
 from dotenv import load_dotenv
 from alpaca.trading.client import TradingClient
-
+import config
 load_dotenv()
 
 # grab env vars
@@ -12,18 +12,15 @@ secret = os.environ.get('ALPACA_SECRET')
 # connect to alpaca API
 api = TradingClient(api_key=key, secret_key=secret, url_override='https://api.alpaca.markets')
 
-# get this dir
-script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# set dir of db to outside folder
-db_path = os.path.join(script_dir, "..", "db", "app.db")
 # connect to DB
-connection = sqlite3.connect(db_path)
+connection = sqlite3.connect(config.db_path)
 
 # set querying type to row object
 connection.row_factory = sqlite3.Row
 # setup cursor
 cursor = connection.cursor()
+
 
 # query select rows
 cursor.execute("""
@@ -39,6 +36,7 @@ symbols = [row['symbol'] for row in rows]
 assets = api.get_all_assets()
 
 # add only active and tradable assets to local db
+# functionality for new symbols
 for asset in assets:
     try:
         if asset.status == "active" and asset.tradable and asset.symbol not in symbols:
