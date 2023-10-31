@@ -15,9 +15,9 @@ api = TradingClient(api_key=key, secret_key=secret, url_override='https://api.al
 # get this dir
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# set dir of db to this folder
-db_path = os.path.join(script_dir, "app.db")
-# establish DB
+# set dir of db to outside folder
+db_path = os.path.join(script_dir, "..", "db", "app.db")
+# connect to DB
 connection = sqlite3.connect(db_path)
 # setup cursor
 cursor = connection.cursor()

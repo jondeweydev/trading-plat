@@ -3,15 +3,15 @@ import os
 
 # get local dir
 script_dir = os.path.dirname(os.path.abspath(__file__))
-# set dir of db to current dir
-db_path = os.path.join(script_dir, "app.db")
+# set dir of db to outside folder
+db_path = os.path.join(script_dir, "..", "db", "app.db")
 # establish DB
 connection = sqlite3.connect(db_path)
 
 # create cursor
 cursor = connection.cursor()
-# get schema path from current dir
-schema_file_path = os.path.join(script_dir, 'schema.sql')
+# get schema path from outside dir
+schema_file_path = os.path.join(script_dir, "..", "db", "schema.sql")
 
 # read sql file
 with open(schema_file_path, 'r') as sql_file:
