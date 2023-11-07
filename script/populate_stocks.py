@@ -24,7 +24,7 @@ assets = config.tradeAPI.get_all_assets()
 # functionality for new symbols
 for asset in assets:
     try:
-        if asset.status == "active" and asset.tradable and asset.symbol not in symbols:
+        if asset.status == "active" and asset.tradable and asset.symbol not in symbols and asset.asset_class == "us_equity":
             print(f"Added a new stock {asset.symbol} {asset.name}")
             cursor.execute("INSERT INTO stock (symbol, name) VALUES (?, ?)", 
                            (asset.symbol, asset.name))

@@ -23,3 +23,4 @@ schema_path = os.path.join(parent_dir, "..", "db", "schema.sql")
 
 # connect to DB
 db_connection = sqlite3.connect(db_path)
+db_connection.row_factory = sqlite3.Row
