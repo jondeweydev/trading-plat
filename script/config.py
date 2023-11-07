@@ -14,7 +14,7 @@ secret = os.environ.get('ALPACA_SECRET')
 tradeAPI = TradingClient(api_key=key, secret_key=secret, url_override='https://api.alpaca.markets')
 
 # client to pull market data
-marketClient = StockHistoricalDataClient(api_key=key, secret_key=secret, url_override='https://api.alpaca.markets')
+marketClient = StockHistoricalDataClient(api_key=key, secret_key=secret)
 
 # establish dir constants
 parent_dir = os.path.dirname(os.path.abspath(__file__))

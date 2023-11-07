@@ -9,7 +9,7 @@ cursor = config.db_connection.cursor()
 
 # query select rows
 cursor.execute("""
-    SELECT symbol, company FROM stock
+    SELECT symbol, name FROM stock
 """)
 
 # grab all rows from cursor
@@ -26,7 +26,7 @@ for asset in assets:
     try:
         if asset.status == "active" and asset.tradable and asset.symbol not in symbols:
             print(f"Added a new stock {asset.symbol} {asset.name}")
-            cursor.execute("INSERT INTO stock (symbol, company) VALUES (?, ?)", 
+            cursor.execute("INSERT INTO stock (symbol, name) VALUES (?, ?)", 
                            (asset.symbol, asset.name))
     except Exception as e:
         print(e)

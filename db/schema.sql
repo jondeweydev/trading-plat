@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS stock_price;
 CREATE TABLE IF NOT EXISTS stock (
     id INTEGER PRIMARY KEY,
     symbol TEXT NOT NULL UNIQUE,
-    company TEXT NOT NULL
+    name TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS stock_price (
