@@ -1,5 +1,7 @@
 import os
 from alpaca.trading.client import TradingClient
+from alpaca.data.historical import StockHistoricalDataClient
+
 import sqlite3
 from dotenv import load_dotenv
 load_dotenv()
@@ -9,7 +11,10 @@ key = os.environ.get('ALPACA_KEY')
 secret = os.environ.get('ALPACA_SECRET')
 
 # connect to alpaca API
-api = TradingClient(api_key=key, secret_key=secret, url_override='https://api.alpaca.markets')
+tradeAPI = TradingClient(api_key=key, secret_key=secret, url_override='https://api.alpaca.markets')
+
+# client to pull market data
+marketClient = StockHistoricalDataClient(api_key=key, secret_key=secret, url_override='https://api.alpaca.markets')
 
 # establish dir constants
 parent_dir = os.path.dirname(os.path.abspath(__file__))

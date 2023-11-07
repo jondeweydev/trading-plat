@@ -3,9 +3,9 @@ import config
 
 
 # set querying type to row object
-config.connection.row_factory = sqlite3.Row
+config.db_connection.row_factory = sqlite3.Row
 # setup cursor
-cursor = config.connection.cursor()
+cursor = config.db_connection.cursor()
 
 # query select rows
 cursor.execute("""
@@ -18,7 +18,7 @@ rows = cursor.fetchall()
 symbols = [row['symbol'] for row in rows]
 
 # grab alpaca data
-assets = config.api.get_all_assets()
+assets = config.tradeAPI.get_all_assets()
 
 # add only active and tradable assets to local db
 # functionality for new symbols
@@ -32,6 +32,6 @@ for asset in assets:
         print(e)
 
 # commit to db
-config.connection.commit()
+config.db_connection.commit()
 
 
