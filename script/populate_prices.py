@@ -35,7 +35,9 @@ for i in range(0, len(symbols), chunk_size):
 )
     # make the request
     barsets = marketClient.get_stock_bars(request_params)
-    print(f"processing chunk {i+chunk_size} of {len(symbols)}")
+    
+    if (i+chunk_size) % 1000 == 0 or i == 0:
+        print(f"processing chunk {i+chunk_size} of {len(symbols)}")
 
     # loop over the keys in the barsets dictionary
     for symbol in barsets.data:
